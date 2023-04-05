@@ -2,6 +2,7 @@ package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
 //import jpabook.jpashop.exception.NotEnoughStockException;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -41,9 +42,9 @@ public abstract class Item {
      */
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
-//        if (restStock < 0) {
-//            throw new NotEnoughStockException("need more stock");
-//        }
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
         this.stockQuantity = restStock;
     }
 }
